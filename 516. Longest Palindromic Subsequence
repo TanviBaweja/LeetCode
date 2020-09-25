@@ -1,0 +1,23 @@
+class Solution:
+    def memoize(self,f):
+        memo=dict()
+        def helper(string, l,r):
+            if (l,r) not in memo:
+                memo[(l,r)]=f(string,l,r)
+            return memo[(l,r)]
+        return helper
+    
+    def myfun(self,string:str, i:int, j:int)->int:
+        if(i==j):
+            return 1
+        elif(string[i]==string[j] and i+1==j):
+            return 2
+        elif(string[i]==string[j]):
+            return self.myfun(string, i+1,j-1) +2
+        else:
+            return max(self.myfun(string, i,j-1), self.myfun(string, i+1,j))
+    
+    def longestPalindromeSubseq(self, s: str) -> int:
+        self.myfun=self.memoize(self.myfun)
+        return self.myfun(s, 0, len(s)-1)
+            
