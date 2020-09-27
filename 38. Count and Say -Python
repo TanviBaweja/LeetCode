@@ -1,0 +1,27 @@
+class Solution:
+    def countAndSay(self, n: int) -> str:
+        new=str(1)
+        if n==1:
+            return new
+        new=str(1)
+        for ctr in range(2,n+1):
+            
+            i=0                           
+            count=0
+            string=str(new)          
+            new=str()
+            value=string[0]
+            
+            while(i<len(string)):
+                
+                if(string[i]==value):
+                    count+=1
+                    i+=1
+                    
+                else:
+                    new+=str(count) +str(value)
+                    count=0
+                    value=string[i]
+            new+=str(count)+str(value)
+        return new
+                       
