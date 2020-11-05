@@ -1,0 +1,32 @@
+class Solution:
+    def checkSubarraySum(self, nums: List[int], k: int) -> bool:
+        ans= False
+        
+        Sum=[0]*len(nums)
+        Sum[0]=nums[0]
+        nums.append(0)
+        for i in range (1,len(Sum)):
+            Sum[i]=Sum[i-1]+nums[i]
+            
+            if k==0 and Sum[i]==0:
+                ans=True
+                break
+            elif k!=0 and Sum[i]%k==0:
+                ans=True
+                break
+        print(Sum)        
+        if ans==False:
+            for j in range (1,len(nums)-1):
+                for i in range(j+1,len(Sum)):
+                    Sum[i]=Sum[i]-nums[j-1]
+                    if k==0 and Sum[i]==0:
+                        ans=True
+                        break
+                    if k!=0 and Sum[i]%k ==0 :
+                        ans=True
+                        break
+                if(ans==True):
+                    break
+        print(Sum)
+        return ans            
+        
