@@ -1,0 +1,29 @@
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        #ans=str()
+          
+        if(sum(nums)==0):
+            return str(0)
+
+        for i in range (len(nums)):
+            nums[i]= str(nums[i])
+     
+    
+        nums.sort(reverse=True)
+     
+        print(len(nums))            
+        i=0    
+        while(i>=0 and i!=(len(nums)-1)):
+            print(i)
+            if (nums[i][0]==nums[i+1][0] and int(nums[i+1]+nums[i])>int(nums[i]+nums[i+1])):
+                nums[i],nums[i+1]=nums[i+1],nums[i]
+                if(i!=0):
+                    i-=1
+            else:
+                i=i+1          
+            print(nums)   
+            print(i)
+        #print(A)
+        #ans=''.join(nums)
+        
+        return ''.join(nums)   
