@@ -1,0 +1,51 @@
+
+class Solution {
+public:
+    int calPow(int x)
+    {
+        int pow=0;       
+        while(x!=1)            
+        {
+            pow++;
+            if(x%2==0)
+                x=x/2;
+            else
+                x=3*x+1;
+        }
+        return pow;
+    }
+    
+    static bool cmp(pair<int, int> a,pair<int, int> b)
+    {
+        return a.second<b.second;
+    }
+     
+    int getKth(int lo, int hi, int k) {
+        int size=hi-lo+1;
+        if (size==1)
+            return lo;
+        vector<pair<int, int>> l;
+
+        for(int i=0;i<size;i++)
+            l.push_back(make_pair(lo+i,calPow(lo+i)));
+
+        sort(l.begin(),l.end(),cmp);
+
+        int kpow=l[k-1].second;
+        int a=0,b=0;
+        for(int i=k-2;i>=0;i--)
+        {
+            if(l[i].second==kpow)
+                a++;
+        }
+        for(int i=k;i<size;i++)
+        {
+            if(l[i].second==kpow)
+                b++;
+        }
+        if(a+b>0)
+            sort(l.begin()+k-1-a,l.begin()+k+b);
+        
+        return l[k-1].first;
+    }
+};
